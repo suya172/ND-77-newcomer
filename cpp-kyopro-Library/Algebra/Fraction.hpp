@@ -21,7 +21,7 @@ struct Fraction {
      * 
      * @param n 整数
      */
-    Fraction(ll n) : num(n), den(1) {};
+    Fraction(ll n = 0) : num(n), den(1) {};
     /**
      * @brief a / b の分数を構築
      * 
