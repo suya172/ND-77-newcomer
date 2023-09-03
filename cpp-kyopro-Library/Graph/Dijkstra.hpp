@@ -5,7 +5,11 @@ using namespace std;
 
 #define INF INT_MAX
 
-//エッジの構造体
+/**
+ * @brief 辺の構造体
+ * 
+ * @tparam long コストの型
+ */
 template <typename T = long long>
 struct edge{
 	int to;
@@ -13,7 +17,14 @@ struct edge{
 	edge(int to, T cost) : to(to), cost(cost) {}
 };
 
-//ダイクストラ法(コストの配列と経路の配列をpairにして返す)
+/**
+ * @brief ダイクストラ法 O(E log V) (E := 辺の本数, V := 頂点の個数)
+ * 
+ * @tparam T コストの型
+ * @param G グラフ
+ * @param s 始点
+ * @return pair<vector<T>, vector<int>> 最短距離のリストと最短経路のリストのペア
+ */
 template <typename T>
 pair<vector<T>, vector<int>> dijkstra(const vector<vector<edge<T>>> &G, int s) {
 	vector<T> dist(G.size(), INF);
@@ -37,7 +48,14 @@ pair<vector<T>, vector<int>> dijkstra(const vector<vector<edge<T>>> &G, int s) {
 	}
 	return make_pair(dist, prev);
 }
-//経路復元
+
+/**
+ * @brief 経路復元
+ * 
+ * @param prev 最短経路のリスト
+ * @param t 終点
+ * @return vector<int> 最短経路
+ */
 vector<int> get_path(const vector<int> &prev, int t) {
 	vector<int> path;
 	for (int cur = t; cur != -1; cur = prev[cur])

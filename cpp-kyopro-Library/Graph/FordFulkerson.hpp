@@ -2,7 +2,10 @@
 
 using namespace std;
 
-// フォードファルカーソン法で最大流を解く
+/**
+ * @brief 最大流計算用グラフ
+ * 
+ */
 struct Graph{
     struct Edge{
         int rev,from,to,cap;
@@ -30,6 +33,11 @@ struct Graph{
         list[to].push_back(Edge(fromrev,to,from,0));
     }
 };
+
+/**
+ * @brief フォードファルカーソン法
+ * 
+ */
 struct FordFulkerson{
     static const int INF=1<<30;
     vector<int> seen;
