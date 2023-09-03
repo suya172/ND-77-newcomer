@@ -1,4 +1,8 @@
-// ローリングハッシュ
+/**
+ * @brief ローリングハッシュ
+ * 
+ * @tparam mod 法
+ */
 template< unsigned mod>
 struct RollingHash {
   vector<unsigned> hashed, power;

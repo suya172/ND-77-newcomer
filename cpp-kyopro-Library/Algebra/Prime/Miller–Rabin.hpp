@@ -3,8 +3,15 @@
 
 using namespace std;
 
-// miller-rabin素数判定法 A := 素数の集合
-// Mod_pow.hppを使う
+/**
+ * @brief ミラー・ラビン素数判定法
+ * 
+ * @param N 判定する数
+ * @param A 素数のリスト
+ * @return true 素数である
+ * @return false 素数でない
+ * @note Mod_pow.hppを使用
+ */
 bool is_prime(long long N, vector<long long> A) {
 	if (N <= 1)
 		return false;

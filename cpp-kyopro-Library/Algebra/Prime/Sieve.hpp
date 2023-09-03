@@ -2,7 +2,12 @@
 
 using namespace std;
 
-// エラトステネスの篩
+/**
+ * @brief  エラトステネスの篩　O(max log log max)
+ * 
+ * @param max 篩の最大値
+ * @return vector<bool> 素数かどうかの表
+ */
 vector<bool> sieve(size_t max){
 	vector<bool> IsPrime;
 	if(max+1 > IsPrime.size())

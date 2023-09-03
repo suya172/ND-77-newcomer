@@ -4,7 +4,11 @@ using namespace std;
 
 #define INF INT_MAX
 
-// エッジの構造体
+/**
+ * @brief 辺の構造体
+ *
+ * @tparam long コストの型
+ */
 template <typename T = long long>
 struct edge{
 	int to;
@@ -12,7 +16,14 @@ struct edge{
 	edge(int to,T weight) : to(to),weight(weight){}
 };
 
-// ワーシャルフロイド法 n := 頂点数
+/**
+ * @brief ワーシャルフロイド法 O(n^3)
+ * 
+ * @tparam T コストの型
+ * @param G グラフ
+ * @param n 頂点数
+ * @return vector<vector<T>> 最短距離のリスト
+ */
 template <typename T>
 vector<vector<T>> warshall_floyd(vector<vector<edge<T>>> &G, int n) {
 	vector<vector<T>> dist(n + 1, vector<T>(n + 1, INF));
