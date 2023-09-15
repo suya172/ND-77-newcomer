@@ -76,15 +76,15 @@ struct Static_Modint {
     /**
      * @brief 加算代入
      */
-    Static_Modint &operator+=(signed long long that) {Static_Modint t = that; this += t; return *this;}
+    Static_Modint &operator+=(signed long long that) {Static_Modint t = that; *this += t; return *this;}
     /**
      * @brief 加算代入
      */
-    Static_Modint &operator+=(signed long that) {Static_Modint t = that; this += t; return *this;}
+    Static_Modint &operator+=(signed long that) {Static_Modint t = that; *this += t; return *this;}
     /**
      * @brief 加算代入
      */
-    Static_Modint &operator+=(signed int that) {Static_Modint t = that; this += t; return *this;}
+    Static_Modint &operator+=(signed int that) {Static_Modint t = that; *this += t; return *this;}
     /**
      * @brief 減算代入
      */
@@ -92,15 +92,15 @@ struct Static_Modint {
     /**
      * @brief 減算代入
      */
-    Static_Modint &operator-=(signed long long that) {Static_Modint t = that; this -= t; return *this;}
+    Static_Modint &operator-=(signed long long that) {Static_Modint t = that; *this -= t; return *this;}
     /**
      * @brief 減算代入
      */
-    Static_Modint &operator-=(signed long that) {Static_Modint t = that; this -= t; return *this;}
+    Static_Modint &operator-=(signed long that) {Static_Modint t = that; *this -= t; return *this;}
     /**
      * @brief 減算代入
      */
-    Static_Modint &operator-=(signed int that) {Static_Modint t = that; this -= t; return *this;}
+    Static_Modint &operator-=(signed int that) {Static_Modint t = that; *this -= t; return *this;}
     /**
      * @brief 乗算代入 
      */
@@ -108,15 +108,15 @@ struct Static_Modint {
     /**
      * @brief 乗算代入
      */
-    Static_Modint &operator*=(signed long long that) {Static_Modint t = that; this *= t; return *this;}
+    Static_Modint &operator*=(signed long long that) {Static_Modint t = that; *this *= t; return *this;}
     /**
      * @brief 乗算代入
      */
-    Static_Modint &operator*=(signed long that) {Static_Modint t = that; this *= t; return *this;}
+    Static_Modint &operator*=(signed long that) {Static_Modint t = that; *this *= t; return *this;}
     /**
      * @brief 乗算代入
      */
-    Static_Modint &operator*=(signed int that) {Static_Modint t = that; this *= t; return *this;}
+    Static_Modint &operator*=(signed int that) {Static_Modint t = that; *this *= t; return *this;}
     /**
      * @brief 除算代入
      */
@@ -124,15 +124,15 @@ struct Static_Modint {
     /**
      * @brief 除算代入
      */
-    Static_Modint &operator/=(signed long long that) {Static_Modint t = that; this /= t; return *this;}
+    Static_Modint &operator/=(signed long long that) {Static_Modint t = that; *this /= t; return *this;}
     /**
      * @brief 除算代入
      */
-    Static_Modint &operator/=(signed long that) {Static_Modint t = that; this /= t; return *this;}
+    Static_Modint &operator/=(signed long that) {Static_Modint t = that; *this /= t; return *this;}
     /**
      * @brief 除算代入
      */
-    Static_Modint &operator/=(signed int that) {Static_Modint t = that; this /= t; return *this;}
+    Static_Modint &operator/=(signed int that) {Static_Modint t = that; *this /= t; return *this;}
     /**
      * @brief 加算 
      */
