@@ -74,17 +74,65 @@ struct Static_Modint {
      */
     Static_Modint &operator+=(Static_Modint that) {if ((x += that.x) >= mod) x -= mod; return *this;}
     /**
+     * @brief 加算代入
+     */
+    Static_Modint &operator+=(signed long long that) {Static_Modint t = that; this += t; return *this;}
+    /**
+     * @brief 加算代入
+     */
+    Static_Modint &operator+=(signed long that) {Static_Modint t = that; this += t; return *this;}
+    /**
+     * @brief 加算代入
+     */
+    Static_Modint &operator+=(signed int that) {Static_Modint t = that; this += t; return *this;}
+    /**
      * @brief 減算代入
      */
     Static_Modint &operator-=(Static_Modint that) {if ((x += mod - that.x) >= mod) x -= mod; return *this;}
+    /**
+     * @brief 減算代入
+     */
+    Static_Modint &operator-=(signed long long that) {Static_Modint t = that; this -= t; return *this;}
+    /**
+     * @brief 減算代入
+     */
+    Static_Modint &operator-=(signed long that) {Static_Modint t = that; this -= t; return *this;}
+    /**
+     * @brief 減算代入
+     */
+    Static_Modint &operator-=(signed int that) {Static_Modint t = that; this -= t; return *this;}
     /**
      * @brief 乗算代入 
      */
     Static_Modint &operator*=(Static_Modint that) {x = (unsigned long long)x * that.x % mod; return *this;}
     /**
+     * @brief 乗算代入
+     */
+    Static_Modint &operator*=(signed long long that) {Static_Modint t = that; this *= t; return *this;}
+    /**
+     * @brief 乗算代入
+     */
+    Static_Modint &operator*=(signed long that) {Static_Modint t = that; this *= t; return *this;}
+    /**
+     * @brief 乗算代入
+     */
+    Static_Modint &operator*=(signed int that) {Static_Modint t = that; this *= t; return *this;}
+    /**
      * @brief 除算代入
      */
     Static_Modint &operator/=(Static_Modint that) {return *this *= that.inverse();}
+    /**
+     * @brief 除算代入
+     */
+    Static_Modint &operator/=(signed long long that) {Static_Modint t = that; this /= t; return *this;}
+    /**
+     * @brief 除算代入
+     */
+    Static_Modint &operator/=(signed long that) {Static_Modint t = that; this /= t; return *this;}
+    /**
+     * @brief 除算代入
+     */
+    Static_Modint &operator/=(signed int that) {Static_Modint t = that; this /= t; return *this;}
     /**
      * @brief 加算 
      */
