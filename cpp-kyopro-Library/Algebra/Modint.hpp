@@ -62,6 +62,14 @@ struct Static_Modint {
      */
     Static_Modint &operator=(signed long long sig) {x = (sig < 0 ? sig % mod + mod : sig % mod); return *this;}
     /**
+     * @brief 代入
+     */
+    Static_Modint &operator=(signed long sig) {x = (sig < 0 ? sig % mod + mod : sig % mod); return *this;}
+    /**
+     * @brief 代入
+     */
+    Static_Modint &operator=(signed int sig) {x = (sig < 0 ? sig % mod + mod : sig % mod); return *this;}
+    /**
      * @brief 加算代入
      */
     Static_Modint &operator+=(Static_Modint that) {if ((x += that.x) >= mod) x -= mod; return *this;}
