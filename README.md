@@ -56,7 +56,7 @@
 > DAGをトポロジカルソートします。
 
 > #### Weighted_Union_Find.hpp
-> 重み付きUnion Find木です
+> 重み付きUnion Find木です。
 
 ### macro_templates
 マクロやテンプレートです。
@@ -72,3 +72,38 @@
 
 > #### RollingHash.hpp
 > ローリングハッシュをします。
+
+### Geometry.hpp
+幾何に関する関数・データ構造です。
+使える機能の以下の通りです。
+
+|名前|説明|
+|:-:|:-:|
+|equal|epsを考慮した等号|
+|unitVec|単位ベクトル|
+|normalVec|法線ベクトル|
+|dot|内積|
+|cross|外積|
+|rotate|回転|
+|rotate_90|90度回転|
+|radian_to_degree|弧度法から度数法変換|
+|degree_to_radian|度数法から弧度法変換|
+|Line|直線|
+|Segment|線分|
+|Circle|円|
+|orthogonal|直行判定|
+|parallel|平行判定|
+|isPointOnLine|点が直線上に存在|
+|isPointOnSegment|点が線分上に存在|
+|distance_Line_Point|点と直線の距離|
+|distance_Segment_Point|点と線分の距離|
+|distance_Segment_Segment|線分と線分の距離|
+|CrossPoint|交点|
+|ccw|3点の位置関係|
+|intersect|交差判定|
+|projection|垂線の足|
+|reflection|反射|
+|inCircle|円の内部に点が存在|
+|tangentPoint|ある点を通る円の接線の接点|
+|commonTnagentLine|2円の共通接線|
+|Circumscribed_Circle|外接円|
