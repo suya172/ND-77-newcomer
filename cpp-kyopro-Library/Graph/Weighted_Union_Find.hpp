@@ -36,7 +36,7 @@ struct Weighted_UnionFind {
         if (par[x] == x) {
             return x;
         } else {
-            int r = root(par[x]);
+            int r = leader(par[x]);
             diff_weight[x] += diff_weight[par[x]];
             return par[x] = r; 
         }
@@ -79,7 +79,7 @@ struct Weighted_UnionFind {
      * @return T weight(y) - weight(x)
      */
     T diff(int x, int y) {
-        assert(leader(x) != leader(y));
+        assert(leader(x) == leader(y));
         return weight(y) - weight(x);
     }
 };
