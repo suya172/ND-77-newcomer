@@ -113,5 +113,6 @@
 |contain|多角形に点が含まれるか判定|
 |convexCut|多角形の切断|
 |convex_Diameter|直径|
+|closest_pair|最近点対|
 
 Point,Line,Segment,Circle,Polygon型については標準出力にも対応しています。
