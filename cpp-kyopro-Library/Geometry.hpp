@@ -461,7 +461,7 @@ namespace geom{
             if (g[i].imag() > g[is].imag()) is = i;
             if (g[i].imag() < g[js].imag()) js = i;
         }
-        D maxdis = norm(p[is] - p[js]);
+        D maxdis = norm(g[is] - g[js]);
         int maxi, maxj, i, j;
         i = maxi = is;
         j = maxj = js;
