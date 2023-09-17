@@ -349,4 +349,24 @@ namespace geom{
         point v = CrossPoint(s, t);
         return Circle(v, abs(v - a));
     }
+
+    inline ostream &operator<<(ostream &os, const point &p) {
+        os << '(' << p.real() << ',' << p.imag() << ')';
+        return os;
+    }
+
+    inline ostream &operator<<(ostream &os, const Line &l) {
+        os << l.a << " to " << l.b;
+        return os;
+    }
+
+    inline ostream &operator<<(ostream &os, const Segment &l) {
+        os << Line(l);
+        return os;
+    }
+
+    inline ostream &operator<<(ostream &os, const Circle &c) {
+        os << "center:" << c.p << " radius:" << c.r; 
+        return os;
+    }
 }
