@@ -106,6 +106,7 @@
 |inCircle|円の内部に点が存在|
 |tangentPoint|ある点を通る円の接線の接点|
 |commonTnagentLine|2円の共通接線|
+|Inscribed_Circle|内接円|
 |Circumscribed_Circle|外接円|
 |area|面積|
 |convex|多角形の凸判定|
