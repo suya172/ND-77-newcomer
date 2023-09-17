@@ -392,20 +392,22 @@ namespace geom{
 
     /**
      * @brief 凸包
+     * @param mode 1直線上の3点を含めるか
      */
-    Polygon ConvexHull(vector<point> &p) {
+    Polygon ConvexHull(vector<point> &p, bool mode = false) {
         int n = p.size(), k = 0;
+        int u = (mode ? -1 : 1);
         sort(p.begin(), p.end(), [](const point &a, const point &b) {
             return (a.real() != b.real() ? a.real() < b.real() : a.imag () < b.imag());
         });
         vector<point> ch(2 * n);
         for (int i = 0; i < n; ch[k++] = p[i++]) {
-            while (k >= 2 && cross(ch[k - 1] - ch[k - 2], p[i] - ch[k - 1]) < EPS) {
+            while (k >= 2 && cross(ch[k - 1] - ch[k - 2], p[i] - ch[k - 1]) < u * EPS) {
                 k--;
             }
         }
         for (int i = n - 2, t = k + 1; i >= 0; ch[k++] = p[i--]) {
-            while (k >= t && cross(ch[k - 1] - ch[k - 2], p[i] - ch[k - 1]) < EPS) {
+            while (k >= t && cross(ch[k - 1] - ch[k - 2], p[i] - ch[k - 1]) < u * EPS) {
                 k--;
             }
         }
