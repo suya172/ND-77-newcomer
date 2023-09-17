@@ -346,6 +346,17 @@ namespace geom{
     }
 
     /**
+     * @brief 内接円
+     */
+    Circle Inscribed_Circle(point &a, point &b, point &c) {
+        D A = abs(b - c), B = abs(a - c), C = abs(a - b);
+        point p(A * real(a) + B * real(b) + C * real(c), A * imag(a) + B * imag(b) + C * imag(c));
+        p /= (A + B + C);
+        D r = distance_Line_Point(Line(a, b), p);
+        return Circle(p, r);
+    }
+
+    /**
      * @brief 3点を通る円 (3角形の外接円)
      */
     Circle Circumscribed_Circle(point &a, point &b, point &c) {
