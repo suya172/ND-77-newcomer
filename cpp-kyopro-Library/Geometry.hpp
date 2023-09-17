@@ -452,7 +452,7 @@ namespace geom{
     }
 
     /**
-     * @brief 凸多角形の直径の２乗
+     * @brief 凸多角形の直径
      */
     D convex_Diameter(Polygon &g) {
         int n = g.size();
@@ -477,7 +477,41 @@ namespace geom{
                 maxj = j;
             }
         } while (i != is || j != js);
-        return maxdis;
+        return sqrt(maxdis);
+    }
+
+    /**
+     * @brief 最近点対の距離
+     */
+    D closest_pair(vector<point> &ps) {
+        if (ps.size() <= 1) throw(0);
+        sort(ps.begin(), ps.end(), [](const point &a, const point &b) {
+            return (a.real() != b.real() ? a.real() < b.real() : a.imag() < b.imag());
+        });
+        auto comp_y = [&](const point &a, const point &b) {
+            return a.imag() < b.imag();
+        };
+        vector<point> beet(ps.size());
+        const D INF = 1e18;
+        function<D(int, int)> rec = [&](int l, int r) {
+            if (r - l <= 1) return INF;
+            int mid = (l + r) >> 1;
+            auto x = ps[mid].real();
+            auto ret = min(rec(l, mid), rec(mid, r));
+            inplace_merge(ps.begin() + l, ps.begin() + mid, ps.begin() + r, comp_y);
+            int ptr = 0;
+            for (int i = l; i < r; i++) {
+                if (abs(ps[i].real() - x) >= ret) continue;
+                for (int j = 0; j < ptr; j++) {
+                    auto luz = ps[i] - beet[ptr - j - 1];
+                    if (luz.imag() >= ret) break;
+                    ret = min(ret, abs(luz));
+                }
+                beet[ptr++] = ps[i];
+            }
+            return ret;
+        };
+        return rec(0, (int)ps.size());
     }
 
     inline ostream &operator<<(ostream &os, const point &p) {
