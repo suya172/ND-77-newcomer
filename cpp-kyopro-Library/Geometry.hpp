@@ -452,7 +452,7 @@ namespace geom{
     }
 
     /**
-     * @brief 凸多角形の直径
+     * @brief 凸多角形の直径の２乗
      */
     D convex_Diameter(Polygon &g) {
         int n = g.size();
