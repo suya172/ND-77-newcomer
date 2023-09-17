@@ -181,6 +181,11 @@ namespace geom{
         return t.a + (t.b - t.a) * (d2 / d1);
     }
 
+    const int COUNTER_CLOCKWISE = 1;
+    const int CLOCKWISE = -1;
+    const int ONLINE_BACK = 2;
+    const int ONLINE_FRONT = -2;
+    const int ON_SEGMENT = 0;
     /**
      * @brief 点p0, p1, p2 の位置関係
      *
@@ -191,14 +196,14 @@ namespace geom{
         point a = p1 - p0;
         point b = p2 - p0;
         if (cross(a, b) > EPS)
-            return 1;
+            return COUNTER_CLOCKWISE;
         if (cross(a, b) < -EPS)
-            return -1;
+            return CLOCKWISE;
         if (dot(a, b) < 0)
-            return 2;
+            return ONLINE_BACK;
         if (norm(a) < norm(b))
-            return -2;
-        return 0;
+            return ONLINE_FRONT;
+        return ON_SEGMENT;
     }
 
     /**
@@ -242,7 +247,7 @@ namespace geom{
 
     /**
      * @brief 2円の関係
-     * @return int 0: 内包, 1: 内接, 2: 2点で交わる, 3: 外接, 4: 交点を持たない
+     * @return int 共通接線の個数, 0: 内包, 1: 内接, 2: 2点で交わる, 3: 外接, 4: 交点を持たない
      */
     int intersect(const Circle &a, const Circle &b) {
         D d = abs(a.p - b.p);
@@ -350,6 +355,100 @@ namespace geom{
         return Circle(v, abs(v - a));
     }
 
+    using Polygon = vector<point>;
+
+    /**
+     * @brief 面積
+     */
+    D area(const Polygon &p) {
+        D res = 0;
+        int n = p.size();
+        for (int i = 0; i < n - 1; i++) {
+            res += cross(p[i], p[i + 1]);
+        }
+        res += cross(p[n - 1], p[0]);
+        return res / D(2);
+    }
+    D area(const Circle &c) {
+        return PI * c.r * c.r;
+    }
+
+    /**
+     * @brief 多角形が凸かどうか
+     */
+    bool convex(Polygon &p) {
+        int n = p.size();
+        int now, pre, nxt;
+        for (int i = 0; i < n; i++) {
+            pre = (i - 1 + n) % n;
+            nxt = (i + 1) % n;
+            now = i;
+            if (ccw(p[pre], p[now], p[nxt]) == -1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * @brief 凸包
+     */
+    Polygon ConvexHull(vector<point> &p) {
+        int n = p.size(), k = 0;
+        sort(p.begin(), p.end(), [](const point &a, const point &b) {
+            return (a.real() != b.real() ? a.real() < b.real() : a.imag () < b.imag());
+        });
+        vector<point> ch(2 * n);
+        for (int i = 0; i < n; ch[k++] = p[i++]) {
+            while (k >= 2 && cross(ch[k - 1] - ch[k - 2], p[i] - ch[k - 1]) < EPS) {
+                k--;
+            }
+        }
+        for (int i = n - 2, t = k + 1; i >= 0; ch[k++] = p[i--]) {
+            while (k >= t && cross(ch[k - 1] - ch[k - 2], p[i] - ch[k - 1]) < EPS) {
+                k--;
+            }
+        }
+        ch.resize(k - 1);
+        return ch;
+    }
+
+    const int OUT = 0;
+    const int ON = 1;
+    const int IN = 2;
+    /**
+     * @brief 点が多角形に含まれるか
+     * @return int 0: 含まれない, 1: 辺上に存在, 2: 含まれる
+     */
+    int contain(const Polygon &g, point &p) {
+        bool in = false;
+        int n = g.size();
+        for (int i = 0; i < n; i++) {
+            point a = g[i] - p, b = g[(i + 1) % n] - p;
+            if (a.imag() > b.imag()) swap(a, b);
+            if (a.imag() <= EPS && EPS < b.imag() && cross(a, b) < -EPS) in = !in;
+            if (equal(cross(a, b), 0) && dot(a, b) <= 0) return ON;
+        }
+        return (in ? IN : OUT);
+    }
+
+    /**
+     * @brief 多角形p を直線l で切断した左側の頂点集合
+     */
+    vector<point> convexCut(Polygon &p, Line &l) {
+        vector<point> res;
+        int n = p.size();
+        for (int i = 0; i < n; i++) {
+            point now = p[i];
+            point nxt = p[(i + 1) % n];
+            if (ccw(l.a, l.b, now) != CLOCKWISE) res.emplace_back(now);
+            if (ccw(l.a, l.b, now) * ccw(l.a, l.b, nxt) < 0) {
+                res.emplace_back(CrossPoint(Line(now, nxt), l));
+            }
+        }
+        return res;
+    }
+
     inline ostream &operator<<(ostream &os, const point &p) {
         os << '(' << p.real() << ',' << p.imag() << ')';
         return os;
@@ -367,6 +466,14 @@ namespace geom{
 
     inline ostream &operator<<(ostream &os, const Circle &c) {
         os << "center:" << c.p << " radius:" << c.r; 
+        return os;
+    }
+
+    inline ostream &operator<<(ostream &os, const Polygon &p) {
+        int n = p.size();
+        for (int i = 0; i < n; i++) {
+            os << p[i] << ',';
+        }
         return os;
     }
 }

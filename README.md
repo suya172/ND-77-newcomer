@@ -107,3 +107,10 @@
 |tangentPoint|ある点を通る円の接線の接点|
 |commonTnagentLine|2円の共通接線|
 |Circumscribed_Circle|外接円|
+|area|面積|
+|convex|多角形の凸判定|
+|ConvexHull|凸包|
+|contain|多角形に点が含まれるか判定|
+|convexCut|多角形の切断|
+
+Point,Line,Segment,Circle,Polygon型については標準出力にも対応しています。
