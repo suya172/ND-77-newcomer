@@ -451,6 +451,35 @@ namespace geom{
         return res;
     }
 
+    /**
+     * @brief 凸多角形の直径
+     */
+    D convex_Diameter(Polygon &g) {
+        int n = g.size();
+        int is = 0, js = 0;
+        for (int i = 1; i < n; i++) {
+            if (g[i].imag() > g[is].imag()) is = i;
+            if (g[i].imag() < g[js].imag()) js = i;
+        }
+        D maxdis = norm(p[is] - p[js]);
+        int maxi, maxj, i, j;
+        i = maxi = is;
+        j = maxj = js;
+        do {
+            if (cross(g[(i + 1) % n] - g[i], g[(j + 1) % n] - g[j]) >= 0) {
+                j = (j + 1) % n;
+            } else {
+                i = (i + 1) % n;
+            }
+            if (norm(g[i] - g[j]) > maxdis) {
+                maxdis = norm(g[i] - g[j]);
+                maxi = i;
+                maxj = j;
+            }
+        } while (i != is || j != js);
+        return maxdis;
+    }
+
     inline ostream &operator<<(ostream &os, const point &p) {
         os << '(' << p.real() << ',' << p.imag() << ')';
         return os;
