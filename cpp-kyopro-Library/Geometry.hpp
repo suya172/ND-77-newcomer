@@ -303,6 +303,7 @@ namespace geom{
         D ph = sqrt(c.r * c.r - d * d);
         res.emplace_back(h - e * ph);
         res.emplace_back(h + e * ph);
+        return res;
     }
 
     /**
