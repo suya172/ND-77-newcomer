@@ -183,16 +183,21 @@ namespace geom{
 
     /**
      * @brief 点p0, p1, p2 の位置関係
-     * 
+     *
      * @return int 1: 反時計回り, -1: 時計回り, 2: c, a, bの順で同一直線上, -2: a, b, cの順で同一直線上, 0: cが線分a, b上に存在
      */
-    int ccw(point &p0, point &p1, point &p2) {
+    int ccw(point &p0, point &p1, point &p2)
+    {
         point a = p1 - p0;
         point b = p2 - p0;
-        if (cross(a, b) > EPS) return 1;
-        if (cross(a, b) < -EPS) return -1;
-        if (dot(a, b) < 0) return 2;
-        if (norm(a) < norm(b)) return -2;
+        if (cross(a, b) > EPS)
+            return 1;
+        if (cross(a, b) < -EPS)
+            return -1;
+        if (dot(a, b) < 0)
+            return 2;
+        if (norm(a) < norm(b))
+            return -2;
         return 0;
     }
 
