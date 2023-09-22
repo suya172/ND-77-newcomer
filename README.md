@@ -115,5 +115,8 @@
 |convexCut|多角形の切断|
 |convex_Diameter|直径|
 |closest_pair|最近点対|
+|Declination_comp|偏角でソートする時の比較関数|
+|Point_comp|座標をpair型とみてソートする時の比較関数|
 
 Point,Line,Segment,Circle,Polygon型については標準出力にも対応しています。
+STLのcomplexを使用しているため、座標へのアクセスは x座標 -> (point).real(), y座標 -> (point).imag() でできます。
