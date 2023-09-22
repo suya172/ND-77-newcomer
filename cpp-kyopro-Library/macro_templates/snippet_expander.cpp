@@ -33,8 +33,6 @@ int main() {
             if (ok) {
                 if (S[i] == '\"') {
                     T += "\\\"";
-                } else if (S[i] == '\'') {
-                    T += "\\\'";
                 } else T += S[i];
             }
             if (count >= 4) {
