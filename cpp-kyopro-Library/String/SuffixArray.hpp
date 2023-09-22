@@ -135,10 +135,9 @@ struct LCP_Array {
         lcp[0] = 0;
         for (int i = 0, h = 0; i < S.size(); i++) {
             if (rank[i] + 1 < S.size()) {
-                for (int j = SA[rank[i] + 1]; max(i, j) + h < S.length() && S[i + h] == S[j + h]; h++) {
-                    lcp[rank[i] + 1] = h;
-                    if (h > 0) h--;
-                }
+                for (int j = SA[rank[i] + 1]; max(i, j) + h < S.length() && S[i + h] == S[j + h]; h++) continue;
+                lcp[rank[i] + 1] = h;
+                if (h > 0) h--;
             }
         }
     }
