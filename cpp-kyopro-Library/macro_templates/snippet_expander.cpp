@@ -17,8 +17,31 @@ int main() {
     cin >> snippet_name;
     string out = "\"" + snippet_name + "\" : { \n \t \"prefix\" : \"" + snippet_name + "\",\n\t\"body\" : [\n";
     while (getline(file, S)) {
-        S = "\t\t\"" + S + "\",\n";
-        out += S;
+        int count = 0;
+        bool ok = false;
+        string T;
+        for (int i = 0; i < S.size(); i++) {
+            if (!ok) {
+                if (S[i] == ' ') {
+                    count++;
+                } else {
+                    ok = true;
+                }
+            }
+            if (ok) {
+                if (S[i] == '\"') {
+                    T += "\\\"";
+                } else if (S[i] == '\'') {
+                    T += "\\\'";
+                } else T += S[i];
+            }
+            if (count == 4) {
+                T += "\\t";
+                count = 0;
+            }
+        }
+        T = "\t\t\"" + T + "\",\n";
+        out += T;
     }
     out += "\t]\n}\n";
     cout << out << endl;
