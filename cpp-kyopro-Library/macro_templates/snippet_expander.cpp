@@ -24,6 +24,8 @@ int main() {
             if (!ok) {
                 if (S[i] == ' ') {
                     count++;
+                } else if (S[i] == '\t') {
+                    count += 4;
                 } else {
                     ok = true;
                 }
@@ -35,7 +37,7 @@ int main() {
                     T += "\\\'";
                 } else T += S[i];
             }
-            if (count == 4) {
+            if (count >= 4) {
                 T += "\\t";
                 count = 0;
             }
