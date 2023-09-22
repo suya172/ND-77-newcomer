@@ -46,7 +46,7 @@ struct SuffixArray {
     }
 
     /**
-     * @brief Construct a new Suffix Array object
+     * @brief SuffixArrayの構築
      */
     SuffixArray (string s = "") {
         Build(s);
@@ -114,5 +114,50 @@ struct SuffixArray {
             os << i << ":" << SA_.S.substr(SA_[i]) << endl;
         }
         return os;
+    }
+};
+
+struct LCP_Array {
+    vector<int> lcp, rank;
+
+    /**
+     * @brief SuffxArrayからLongestCommonPrefixArrayを構築する
+     * 
+     * @param SA 
+     */
+    void Build(SuffixArray &SA) {
+        string &S = SA.S;
+        rank.resize(S.size());
+        for (int i = 0; i < S.size(); i++) {
+            rank[SA[i]] = i;
+        }
+        lcp.resize(S.size());
+        lcp[0] = 0;
+        for (int i = 0, h = 0; i < S.size(); i++) {
+            if (rank[i] + 1 < S.size()) {
+                for (int j = SA[rank[i] + 1]; max(i, j) + h < S.length() && S[i + h] == S[j + h]; h++) {
+                    lcp[rank[i] + 1] = h;
+                    if (h > 0) h--;
+                }
+            }
+        }
+    }
+
+    /**
+     * @brief SuffxArrayからLongestCommonPrefixArrayを構築する
+     */
+    LCP_Array(SuffixArray &SA) {
+        Build(SA);
+    }
+
+    /**
+     * @brief LCP_Arrayのサイズ
+     */
+    int size() {
+        return lcp.size();
+    }
+ 
+    int operator[](int i) {
+        return lcp[i];
     }
 };
