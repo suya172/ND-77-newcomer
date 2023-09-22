@@ -8,7 +8,7 @@ namespace geom{
     using D = long double;
     using point = complex<D>;
     const D EPS = 1e-7;
-    const D PI = acos(D(-1));
+    const D PI = acos(D(-1));    
 
     /**
      * @brief 誤差を考慮した等号
@@ -523,6 +523,20 @@ namespace geom{
             return ret;
         };
         return rec(0, (int)ps.size());
+    }
+
+    /**
+     * @brief 偏角ソートの比較関数 (-π ≤ arg ≤ π)
+     */
+    bool Declination_comp(point &a, point &b) {
+        return arg(a) < arg(b);
+    }
+
+    /**
+     * @brief 点のソートの比較関数
+     */
+    bool Point_comp(point &a, point &b) {
+        return (a.real() != b.real() ? a.imag() < b.imag() : a.real() < b.real());
     }
 
     inline ostream &operator<<(ostream &os, const point &p) {
