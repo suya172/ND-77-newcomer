@@ -61,6 +61,9 @@
 ### macro_templates
 マクロやテンプレートです。
 
+> #### snippet_expander.cpp
+> cppファイルをVScodeのスニペットの形式に整形します。
+
 > #### template_atcoder.cpp
 > AtCoder用のテンプレートです。
 
