@@ -73,6 +73,9 @@
 > #### RollingHash.hpp
 > ローリングハッシュをします。
 
+> #### SuffixArray.hpp
+> SuffixArray (接尾辞配列)を構築します。
+
 ### Geometry.hpp
 幾何に関する関数・データ構造です。
 使える機能の以下の通りです。
