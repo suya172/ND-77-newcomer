@@ -539,6 +539,51 @@ namespace geom{
         return (a.real() != b.real() ? a.imag() < b.imag() : a.real() < b.real());
     }
 
+    /**
+     * @brief 直線の重複を取り除く
+     */
+    vector<Line> merge(vector<Line> L) {
+        auto comp = [](Line &a, Line &b) {
+            point l = a.b - a.a;
+            point m = b.b - b.a;
+            if (l.real() < 0)
+                l *= -1;
+            if (m.real() < 0)
+                m *= -1;
+            if (equal(a.a.real(), a.b.real()) && l.imag() > -EPS)
+                l *= -1;
+            if (equal(b.a.real(), b.b.real()) && m.imag() > -EPS)
+                m *= -1;
+            return Declination_comp(l, m);
+        };
+        vector<Line> ans;
+        vector<bool> ok(L.size(), true);
+        sort(L.begin(), L.end(), comp);
+        for (int i = 0; i < L.size(); i++) {
+            if (!ok[i]) continue;
+            ans.emplace_back(L[i]);
+            for (int j = i + 1; j < L.size(); j++) {
+                point l = L[i].b - L[i].a;
+                point m = L[j].b - L[j].a;
+                if (l.real() < 0)
+                    l *= -1;
+                if (m.real() < 0)
+                    m *= -1;
+                if (equal(L[i].a.real(), L[i].b.real()) && l.imag() > -EPS)
+                    l *= -1;
+                if (equal(L[j].a.real(), L[j].b.real()) && m.imag() > -EPS)
+                    m *= -1;
+                if (!equal(arg(l), arg(m)))
+                    break;
+                if (!ok[j]) continue;
+                if (parallel(L[i], L[j]) && isPointOnLine(L[i].a, L[j])) {
+                    ok[j] = false;
+                }
+            }
+        }
+        return ans;
+    }
+
     inline ostream &operator<<(ostream &os, const point &p) {
         os << '(' << p.real() << ',' << p.imag() << ')';
         return os;
