@@ -46,7 +46,7 @@ struct Static_Modint {
     /**
      * @brief 逆元(存在しなければエラー)
      */
-    Static_Modint inverse() const {
+    Static_Modint inv() const {
         long long a = x, b = mod, u = 1, v = 0;
         while (b) {
             long long t = a / b;
