@@ -3,7 +3,7 @@
 
 using namespace std;
 
-template<typename S, typename T, S (*merge)(S, S, T), S (*e)(), S (*add_root)(S), T (*cost_e)()>
+template<typename S, typename T, S (*merge)(S, S, T), S (*e)(), S (*add_root)(S)>
 struct DP_on_trees {
     struct edge {
         int to;
