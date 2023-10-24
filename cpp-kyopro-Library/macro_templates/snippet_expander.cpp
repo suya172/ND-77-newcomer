@@ -4,11 +4,13 @@
 
 using namespace std;
 
-int main() {
+int main()
+{
     string file_path;
     cin >> file_path;
     ifstream file(file_path);
-    if (file.fail()) {
+    if (file.fail())
+    {
         cout << "File does not exist" << endl;
         exit(EXIT_FAILURE);
     }
@@ -16,26 +18,39 @@ int main() {
     string snippet_name;
     cin >> snippet_name;
     string out = "\"" + snippet_name + "\" : { \n \t \"prefix\" : \"" + snippet_name + "\",\n\t\"body\" : [\n";
-    while (getline(file, S)) {
+    while (getline(file, S))
+    {
         int count = 0;
         bool ok = false;
         string T;
-        for (int i = 0; i < S.size(); i++) {
-            if (!ok) {
-                if (S[i] == ' ') {
+        for (int i = 0; i < S.size(); i++)
+        {
+            if (!ok)
+            {
+                if (S[i] == ' ')
+                {
                     count++;
-                } else if (S[i] == '\t') {
+                }
+                else if (S[i] == '\t')
+                {
                     count += 4;
-                } else {
+                }
+                else
+                {
                     ok = true;
                 }
             }
-            if (ok) {
-                if (S[i] == '\"') {
+            if (ok)
+            {
+                if (S[i] == '\"')
+                {
                     T += "\\\"";
-                } else T += S[i];
+                }
+                else
+                    T += S[i];
             }
-            if (count >= 4) {
+            if (count >= 4)
+            {
                 T += "\\t";
                 count = 0;
             }
