@@ -12,10 +12,10 @@ namespace debug {
     void dump(const T a, const string label = "", const source_location location = source_location::current()) {
         dump_init(location);
         if (label == "") {
-            cout << a << endl;
+            cerr << a << endl;
             return;
         }
-        cout << label << " : " << a << endl;
+        cerr << label << " : " << a << endl;
     }
 };
 
