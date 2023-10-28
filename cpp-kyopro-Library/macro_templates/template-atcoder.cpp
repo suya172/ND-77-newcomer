@@ -23,17 +23,32 @@ using pll = pair<ll, ll>;
 using vpii = vector<pii>;
 using vpll = vector<pll>;
 using vstr = vector<string>;
-constexpr ll INF_LL=1e17;
+constexpr ll INF_LL=5e18;
 constexpr int INF_I=1LL<<30;
 constexpr ll inf = 1e12 + 7;
-#define rep(i,n) for(int i=0; i<((int)(n)); i++)
+#define rep1(i,n) for(int i=0; i<((int)(n)); i++)
 #define reps(i,n) for(int i=1; i<=((int)(n)); i++)
+#define rep3(i, a, b) for (int i = a; i < b; i++)
+#define rep4(i, a, b, c) for (int i = a; i < b; i += c)
+#define overload4(a, b, c, d, e, ...) e
+#define rep(...) overload4(__VA_ARGS__, rep4, rep3, rep1)(__VA_ARGS__)
 #define vector_cin(x) for(auto &n : (x)) cin >> n
 #define ALL(x) (x).begin(), (x).end()
 #define YesNo(x) ((x) ? "Yes": "No")
 #define pb emplace_back
-#define to_lower(S) transform(ALL((S)), (S).begin(), ::tolower)
-#define to_upper(S) transform(ALL((S)), (S).begin(), ::toupper)
+inline void to_lower(const std::string::iterator &begin, const std::string::iterator &end) {transform(begin, end, begin, ::tolower);}
+inline void to_upper(const std::string::iterator &begin, const std::string::iterator &end) {transform(begin, end, begin, ::toupper);}
+#define mp make_pair
+#define mt make_tuple
+template <class... T>
+constexpr auto min(T... a) {
+return min(initializer_list<common_type_t<T...>>{a...});
+}
+
+template <class... T>
+constexpr auto max(T... a) {
+return max(initializer_list<common_type_t<T...>>{a...});
+}
 template <typename T>
 bool chmax(T &a, const T& b) {if (a < b){a = b;return true;}return false;}
 
@@ -69,6 +84,22 @@ template <typename T>
 ostream &operator<<(ostream &os, stack<T> st) { while (st.size()){ os << st.top() << " "; st.pop();} return os;}
 template <class T, class Container, class Compare>
 ostream &operator<<(ostream &os, priority_queue<T, Container, Compare> pq) { while (pq.size()) {os << pq.top() << " ";pq.pop();}return os;}
-//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
-
-void Main () {}
+namespace debug {
+    void dump_init(const source_location location = std::source_location::current()) {
+        cerr << "\033[32m[dump] \033[m\033[36m" << location.file_name() << ":" << location.line() << ":" << location.function_name() << "\033[m ";
+    }
+    template <typename T>
+    void dump(const T a, const string label = "", const source_location location = source_location::current()) {
+            dump_init(location);
+            if (label == "") {
+                cerr << a << endl;
+                return;
+            }
+        cerr << label << " : " << a << endl;
+    }
+}
+#ifdef __LOCAL
+#define debug(...) debug::dump(__VA_ARGS__, #__VA_ARGS__)
+#else
+#define debug(...) void(0);
+#endif

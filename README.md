@@ -136,3 +136,9 @@
 
 Point,Line,Segment,Circle,Polygon型については標準出力にも対応しています。
 STLのcomplexを使用しているため、座標へのアクセスは x座標 -> (point).real(), y座標 -> (point).imag() でできます。
+
+### Others
+その他のアルゴリズム・データ構造です。
+
+> #### Dump.hpp
+> デバッグ用の関数です。
