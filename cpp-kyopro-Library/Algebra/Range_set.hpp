@@ -83,5 +83,6 @@ struct range_set {
         for (auto &p : ss.s) {
             os << "[" << p.first << "," << p.second + 1 << ")" << " ";
         }
+        return os;
     }
 };
