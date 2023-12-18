@@ -120,7 +120,7 @@ struct Static_Modint {
     /**
      * @brief 除算代入
      */
-    Static_Modint &operator/=(Static_Modint that) {return *this *= that.inverse();}
+    Static_Modint &operator/=(Static_Modint that) {return *this *= that.inv();}
     /**
      * @brief 除算代入
      */
