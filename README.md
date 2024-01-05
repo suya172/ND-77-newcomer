@@ -56,6 +56,9 @@
 > #### DP_on_trees.hpp
 > 木DPのデータ構造です。
 
+> #### EulerianTrail.hpp
+> DFS順のオイラーツアーをします。
+
 > #### Floyd-Warshall.hpp
 > ワーシャルフロイド法で最短距離を求めます。
 
