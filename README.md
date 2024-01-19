@@ -68,6 +68,9 @@
 > #### Rerooting.hpp
 > 全方位木DPのデータ構造です。
 
+> #### RollbackUnionFind.hpp
+> Undo可能Union Findです。
+
 > #### Topological_sort.hpp
 > DAGをトポロジカルソートします。
 
